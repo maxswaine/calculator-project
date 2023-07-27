@@ -1,0 +1,27 @@
+@use "./buttons";
+@use "./grid";
+@use "./screen";
+@use "./variables" as *;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: $darkBackground;
+  color: white;
+  font-family: $numberFont;
+  flex-wrap: wrap;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  &__screen {
+    height: 30vh;
+  }
+  &__input {
+    justify-content: center;
+    align-items: center;
+  }
+}

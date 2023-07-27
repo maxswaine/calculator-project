@@ -1,0 +1,35 @@
+@use "./variables" as *;
+
+.calculator__mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  &-button {
+    margin: 1em;
+    height: 1.5em;
+    width: 1.5em;
+  }
+}
+
+.calculator__input-grid {
+  background-color: $lighterDarkBackground;
+  border-radius: 20px;
+  .calculator__input-button {
+    display: flex;
+    background-color: $darkBackground;
+    color: white;
+    height: 80%;
+    width: 80%;
+    margin: 0.5em;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    &--red {
+      color: $red;
+    }
+    &--green {
+      color: $turquoise;
+    }
+  }
+}
