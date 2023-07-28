@@ -1,5 +1,10 @@
 .calculator {
-  &__output-screen {
-    height: 100%;
+  &__output {
+    height: 65%;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
 }
