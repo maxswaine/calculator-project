@@ -47,29 +47,9 @@ const handleDigitButton = (button: HTMLButtonElement) => {
 const handleEqualsButton = () => {
   let sum: string = outputScreen.innerText;
   outputSum.innerText = sum;
-  const result = calculateSum(sum);
-  outputSum.innerText = result.toString();
+  //   const result = calculateSum(sum);
+  //   outputSum.innerText = result.toString();
   isFirstButtonPress = true;
-};
-
-const calculateSum = (sum: string) => {
-  const [num1Str, operator, num2Str] = sum.split(operatorRegex);
-
-  const num1 = parseFloat(num1Str);
-  const num2 = parseFloat(num2Str);
-
-  switch (operator) {
-    case "+":
-      return num1 + num2;
-    case "-":
-      return num1 - num2;
-    case "x":
-      return num1 * num2;
-    case "/":
-      return num1 / num2;
-    default:
-      throw new Error("Invalid operator");
-  }
 };
 
 // Function to handle button presses
