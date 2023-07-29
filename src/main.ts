@@ -30,6 +30,36 @@ const handleACButton = () => {
   outputScreen.innerText = "0";
 };
 
+const calculateSum = (input: string) => {
+  const parts = input.split(operatorRegex);
+
+  numbers = parts.map((part) => parseFloat(part));
+  operators = input.split(numberRegex).filter(Boolean);
+
+  let result = numbers[0];
+
+  for (let i = 0; i < operators.length; i++) {
+    switch (operators[i]) {
+      case "+":
+        result += numbers[i + 1];
+        break;
+      case "-":
+        result -= numbers[i + 1];
+        break;
+      case "x":
+        result *= numbers[i + 1];
+        break;
+      case "/":
+        result /= numbers[i + 1];
+        break;
+      default:
+        break;
+    }
+  }
+
+  return result;
+};
+
 // Function to handle digit buttons
 const handleDigitButton = (button: HTMLButtonElement) => {
   let digit = button.innerText;
@@ -46,14 +76,12 @@ const handleDigitButton = (button: HTMLButtonElement) => {
   }
 };
 
-//Function to reset the stored numbers and operators
-
 // Function to handle the equals button
 const handleEqualsButton = () => {
   let sum: string = outputScreen.innerText;
   outputSum.innerText = sum;
-  // const result = calculateSum(sum);
-  // outputSum.innerText = result.toString();
+  const result = calculateSum(sum);
+  outputScreen.innerText = result.toString();
   isFirstButtonPress = true;
 };
 
