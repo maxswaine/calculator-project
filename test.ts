@@ -10,6 +10,9 @@ const outputScreen = document.querySelector<HTMLElement>(
 const outputSum = document.querySelector<HTMLDivElement>(
   ".calculator__output-sum"
 );
+const operatorButton = document.querySelector<HTMLButtonElement>(
+  ".calculator__input-button--red"
+);
 
 let numbers: number[] = [];
 let operators: string[] = [];
@@ -19,6 +22,9 @@ if (!buttons) {
 }
 if (!outputScreen || !outputSum) {
   throw new Error("Issue with output");
+}
+if (!operatorButton) {
+  throw new Error("Issue with operators");
 }
 
 const operatorRegex = /[x/+-]/;
@@ -52,9 +58,23 @@ const handleDigitButton = (button: HTMLButtonElement) => {
 const handleEqualsButton = () => {
   let sum: string = outputScreen.innerText;
   outputSum.innerText = sum;
-  // const result = calculateSum(sum);
-  // outputSum.innerText = result.toString();
+  const result = calculateSum(sum);
+  outputSum.innerText = result.toString();
   isFirstButtonPress = true;
+};
+
+//Function to handle Operator Button
+const handleOperatorButton = (button: HTMLButtonElement) => {
+  let operator = operatorButton.innerText;
+  isFirstButtonPress = true;
+  operators.push(operator);
+
+  // Store the current number before starting a new one
+  const currentNumber = parseFloat(outputScreen.innerText);
+  numbers.push(currentNumber);
+
+  // Reset the screen for the next number
+  outputScreen.innerText = "0";
 };
 
 // Function to handle button presses
@@ -64,10 +84,10 @@ const handleButtonInput = (event: Event) => {
 
   if (digit === "AC") {
     handleACButton();
+  } else if (numberRegex.test(digit) || operatorRegex.test(digit)) {
+    handleDigitButton(button);
   } else if (digit === "=") {
     handleEqualsButton();
-  } else {
-    handleDigitButton(button);
   }
 };
 
