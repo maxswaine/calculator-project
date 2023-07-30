@@ -22,12 +22,13 @@ if (!outputScreen || !outputSum) {
 }
 
 const operatorRegex = /[x/+-]/;
-const numberRegex = /\d/;
+const numberRegex = /-?\d+(\.\d+)?/;
 let isFirstButtonPress: boolean = true;
 
 // Function to handle the AC button
 const handleACButton = () => {
   outputScreen.innerText = "0";
+  isFirstButtonPress = true;
 };
 
 const calculateSum = (input: string) => {
@@ -85,6 +86,33 @@ const handleEqualsButton = () => {
   isFirstButtonPress = true;
 };
 
+// Function to handle the undo button
+const handleUndoButton = () => {
+  let currentContent = outputScreen.innerText;
+  if (currentContent.length > 0) {
+    currentContent = currentContent.slice(0, -1);
+    outputScreen.innerText = currentContent;
+  }
+};
+
+const handlePercentageButton = () => {
+  handleEqualsButton();
+  const result = parseFloat(outputScreen.innerText) / 100;
+  outputScreen.innerText = result.toString();
+};
+
+const handleMinusButton = () => {
+  let currentContent = outputScreen.innerText;
+  if (currentContent !== "0") {
+    if (currentContent[0] === "-") {
+      currentContent = currentContent.slice(1);
+    } else {
+      currentContent = `-${currentContent}`;
+    }
+  }
+  outputScreen.innerText = currentContent;
+};
+
 // Function to handle button presses
 const handleButtonInput = (event: Event) => {
   const button = event.target as HTMLButtonElement;
@@ -94,11 +122,17 @@ const handleButtonInput = (event: Event) => {
     handleACButton();
   } else if (digit === "=") {
     handleEqualsButton();
+  } else if (digit === "⟲") {
+    // Undo button
+    handleUndoButton();
+  } else if (digit === "%") {
+    handlePercentageButton();
+  } else if (digit === "+/-") {
+    handleMinusButton();
   } else {
     handleDigitButton(button);
   }
 };
-
 // Add event listeners to buttons
 buttons.forEach((button) => {
   button.addEventListener("click", handleButtonInput);
