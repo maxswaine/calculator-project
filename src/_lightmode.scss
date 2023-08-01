@@ -3,7 +3,8 @@
 .light-mode {
   * {
     background-color: $lightBackground;
-    color: black;
+    color: #165baa;
+    font-size: bold;
   }
 
   #lightModeButton {
@@ -12,14 +13,14 @@
 
   #darkModeButton {
     display: none;
-    background-color: $darkerLightBackground;
+    background-color: $lightFront;
   }
 
   .calculator__input-grid {
-    background-color: $darkerLightBackground;
+    background-color: $lightFront;
   }
 
   .calculator__mode {
-    background-color: $darkerLightBackground;
+    background-color: $lightFront;
   }
 }
