@@ -1,0 +1,25 @@
+@use "./variables" as *;
+
+.light-mode {
+  * {
+    background-color: $lightBackground;
+    color: black;
+  }
+
+  #lightModeButton {
+    display: block;
+  }
+
+  #darkModeButton {
+    display: none;
+    background-color: $darkerLightBackground;
+  }
+
+  .calculator__input-grid {
+    background-color: $darkerLightBackground;
+  }
+
+  .calculator__mode {
+    background-color: $darkerLightBackground;
+  }
+}

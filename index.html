@@ -8,20 +8,24 @@
   </head>
   <body>
     <div class="calculator">
-      <section class="calculator__screen">
+      <section class="calculator__display">
         <div class="calculator__mode">
           <img
+            id="lightModeButton"
             class="calculator__mode-button calculator__mode-button--light-mode"
             src="./src/images/light-mode-svgrepo-com.svg"
           />
           <img
+            id="darkModeButton"
             class="calculator__mode-button calculator__mode-button--dark-mode"
             src="./src/images/moon-svgrepo-com.svg"
           />
         </div>
+      </section>
+      <section class="calculator__screen">
         <div class="calculator__output">
-          <div class="calculator__output-sum">previous sum placeholder</div>
-          <div class="calculator__output-placeholder">Output placeholder</div>
+          <div class="calculator__output-sum">0</div>
+          <div class="calculator__output-placeholder">0</div>
         </div>
       </section>
 
