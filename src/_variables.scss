@@ -5,9 +5,9 @@ $red: #da6367;
 $lighterDarkBackground: #292d36;
 $darkBackground: #22252d;
 
-$darkerLightBackground: grey;
-
-//font
+//Light mode
+$lightBackground: #f0ead6;
+$darkerLightBackground: rgba(15, 21, 41, 0.8); //font
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap");
 
 $numberFont: "Prompt", sans-serif;

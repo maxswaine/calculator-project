@@ -11,6 +11,14 @@ const outputSum = document.querySelector<HTMLDivElement>(
   ".calculator__output-sum"
 );
 
+const lightModeButton = document.querySelector<HTMLImageElement>(
+  ".calculator__mode-button--light-mode"
+);
+const darkModeButton = document.querySelector<HTMLImageElement>(
+  ".calculator__mode-button--dark-mode"
+);
+const calculator = document.querySelector<HTMLElement>("body");
+
 let numbers: number[] = [];
 let operators: string[] = [];
 
@@ -21,12 +29,23 @@ if (!outputScreen || !outputSum) {
   throw new Error("Issue with output");
 }
 
-const operatorRegex = /(-?\d+(\.\d+)?|[+x/\-])/g; //Regex matches any type of number and all operators and splits them into array
+if (!lightModeButton || !darkModeButton || !calculator) {
+  throw new Error("Issue with theme toggle");
+}
+
+//Regex Key:
+// Checks for conditional minus sign
+// After that it looks through to find one or more digits
+// Check for optional decimal point, followed by one or more digits
+// Separates with | and then finds the operators
+//global flag
+const operatorRegex = /(-?\d+(\.\d+)?|[+x/\-])/g;
 let isFirstButtonPress: boolean = true;
 
 // Function to handle the AC button
 const handleACButton = () => {
   outputScreen.innerText = "0";
+  outputSum.innerText = "0";
   isFirstButtonPress = true;
 };
 
@@ -46,8 +65,8 @@ const calculateSum = (input: string) => {
   let result = numbers[0];
 
   //Iterate through the array to see what functions need to be done.
-  for (let i = 0; i < operators.length; i++) {
-    switch (operators[i]) {
+  operators.forEach((operator, i) => {
+    switch (operator) {
       case "+":
         result += numbers[i + 1];
         break;
@@ -63,8 +82,7 @@ const calculateSum = (input: string) => {
       default:
         break;
     }
-  }
-
+  });
   return result;
 };
 
@@ -90,7 +108,7 @@ const handleEqualsButton = () => {
   outputSum.innerText = sum;
   const result = calculateSum(sum);
   outputScreen.innerText = result.toString();
-  isFirstButtonPress = true;
+  isFirstButtonPress = false;
 };
 
 // Function to handle the undo button using slice to remove the last item from string array
@@ -136,7 +154,6 @@ const handleButtonInput = (event: Event) => {
   } else if (digit === "=") {
     handleEqualsButton();
   } else if (digit === "⟲") {
-    // Undo button
     handleUndoButton();
   } else if (digit === "%") {
     handlePercentageButton();
@@ -146,7 +163,27 @@ const handleButtonInput = (event: Event) => {
     handleDigitButton(button);
   }
 };
+
+const handleThemeToggle = () => {
+  calculator.classList.toggle("light-mode");
+
+  // Toggle the visibility of the mode buttons
+  if (calculator.classList.contains("light-mode")) {
+    // console.log("Switching to light mode");
+    lightModeButton.style.display = "none";
+    darkModeButton.style.display = "block";
+  } else {
+    // console.log("Switching to dark mode");
+
+    darkModeButton.style.display = "none";
+    lightModeButton.style.display = "block";
+  }
+};
+
 // Add event listeners to buttons
 buttons.forEach((button) => {
   button.addEventListener("click", handleButtonInput);
 });
+
+lightModeButton.addEventListener("click", handleThemeToggle);
+darkModeButton.addEventListener("click", handleThemeToggle);

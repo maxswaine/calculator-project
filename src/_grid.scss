@@ -1,9 +1,7 @@
 .grid-container {
   display: grid;
-  margin-top: 12vh;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   justify-items: center;
   align-items: center;
-  max-height: 100vh;
 }
