@@ -6,16 +6,14 @@
     color: #165baa;
     font-size: bold;
   }
-
-  #lightModeButton {
-    display: block;
-  }
-
   #darkModeButton {
-    display: none;
+    display: block;
     background-color: $lightFront;
   }
 
+  #lightModeButton {
+    display: none;
+  }
   .calculator__input-grid {
     background-color: $lightFront;
   }

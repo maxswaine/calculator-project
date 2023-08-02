@@ -34,12 +34,13 @@ if (!lightModeButton || !darkModeButton || !calculator) {
 }
 
 //Regex Key:
-// Checks for conditional minus sign
-// After that it looks through to find one or more digits
-// Check for optional decimal point, followed by one or more digits
-// Separates with | and then finds the operators
+// (?<!\d) --> Look behind function to check if there is a negative number, rather than doing a sum
+// -? --> Checks for conditional minus sign
+// \d+ --> Looks through to find one or more digits
+// (\.\d+)? --> Check for optional decimal point, followed by one or more digits
+// | --> Separator to finds the operators
 //global flag
-const operatorRegex = /(-?\d+(\.\d+)?|[+x/\-])/g;
+const operatorRegex = /(?<!\d)-?\d+(\.\d+)?|[+x/\-]/g;
 let isFirstButtonPress: boolean = true;
 
 // Function to handle the AC button
@@ -166,18 +167,6 @@ const handleButtonInput = (event: Event) => {
 
 const handleThemeToggle = () => {
   calculator.classList.toggle("light-mode");
-
-  // Toggle the visibility of the mode buttons
-  if (calculator.classList.contains("light-mode")) {
-    // console.log("Switching to light mode");
-    lightModeButton.style.display = "none";
-    darkModeButton.style.display = "block";
-  } else {
-    // console.log("Switching to dark mode");
-
-    darkModeButton.style.display = "none";
-    lightModeButton.style.display = "block";
-  }
 };
 
 // Add event listeners to buttons
